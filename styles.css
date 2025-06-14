@@ -15,7 +15,7 @@ h1 {
     margin-top: 0.2em;
 }
 
-div, h1, h2, h3, label, p, span, button, a {
+div, h1, h2, h3, label, p, span, button, a, textarea {
     color: #ddd;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -111,6 +111,61 @@ input {
     font-weight: bold;
 }
 
+.input-blocker {
+    background-color: #000000;
+    opacity: 0%;
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+}
+
+.preview-container {
+    background-color: #252930;
+    position: fixed;
+    transition: 0.5s ease;
+    width: 80vw;
+    height: 80vh;
+    top: 100vh;
+    left: 10vw;
+}
+
+.preview-container > h1 {
+    height: 5vh;
+    line-height: 5vh;
+    width: 100%;
+    background-color: #222;
+    margin: 0;
+    padding: 2vh 0;
+}
+
+.preview-container > button {
+    position: absolute;
+    top: 1.5vh;
+    right: 1.5vh;
+    font-size: x-large;
+    font-weight: bold;
+    border-radius: 100vw;
+    aspect-ratio: 1;
+    background-color: #a52727;
+    height: 6vh;
+    pad: 0;
+}
+
+.preview-container > textarea {
+    height: 71vh;
+    width: 100%;
+    background-color: transparent;
+    font-size: xx-large;
+    padding: 0;
+    margin: 0;
+    resize: none;
+}
+
 label, input[type="date"] {
     height: 4vh;
     margin: 1vh 0;
@@ -123,8 +178,7 @@ label {
 
 a {
     position: fixed;
-    top: 100vh;
-    transform: translateY(calc(-100% - 10px));
+    bottom: 10px;
     left: 10px;
     display: block;
     color: rgb(116, 148, 255);

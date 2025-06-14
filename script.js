@@ -1,6 +1,11 @@
 const SET_COLUMN = document.getElementById("set-column");
 const REMOVE_SET_COLUMN = document.getElementById("remove-set-column");
 const ADD_SET_BUTTON = document.getElementById("add-set");
+const CLOSE_PREVIEW_BUTTON = document.getElementById("close-preview");
+
+const PREVIEW_CONTAINER = document.getElementById("preview-container");
+const PREVIEW_TEXTAREA = document.getElementById("preview-text");
+const INPUT_BLOCKER = document.getElementById("input-blocker")
 
 const TEAM_1_COLUMN = document.getElementById("team-1-column");
 const TEAM_2_COLUMN = document.getElementById("team-2-column");
@@ -19,6 +24,19 @@ function onSetRemoval(indexOfRemovedSet){
     for(let i = indexOfRemovedSet; i < SETS.length; i++){
         SETS[i].setIndex(i);
     }
+}
+
+function showPreview(logString){
+    PREVIEW_CONTAINER.style.top = "10vh";
+    INPUT_BLOCKER.style.opacity = "70%";
+    INPUT_BLOCKER.style.display = "block";
+    PREVIEW_TEXTAREA.value = logString;
+}
+
+function closePreview(){
+    PREVIEW_CONTAINER.style.top = "100vh";
+    INPUT_BLOCKER.style.opacity = "0%";
+    INPUT_BLOCKER.style.display = "none";
 }
 
 SCRIM_DATE.valueAsDate = new Date();
@@ -55,5 +73,7 @@ GENERATE_LOG.onclick = () => {
     }
 
     navigator.clipboard.writeText(logString);
-    alert("COPIED TO CLIPBOARD");
+    showPreview(logString);
 }
+
+CLOSE_PREVIEW_BUTTON.onclick = closePreview;
