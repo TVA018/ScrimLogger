@@ -1,11 +1,11 @@
 html, body {
     width: 100%;
-    height: fit-content;
     margin: 0;
     padding: 0;
 }
 
 body {
+    height: fit-content;
     background-color: #3c4057;
     display: block;
 }
@@ -15,7 +15,7 @@ h1 {
     margin-top: 0.2em;
 }
 
-div, h1, h2, h3, label, p, span, button {
+div, h1, h2, h3, label, p, span, button, a {
     color: #ddd;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -119,4 +119,14 @@ label, input[type="date"] {
 
 label {
     font-weight: bold;
+}
+
+a {
+    position: fixed;
+    top: 100vh;
+    transform: translateY(calc(-100% - 10px));
+    left: 10px;
+    display: block;
+    color: rgb(116, 148, 255);
+    font-size: large;
 }
