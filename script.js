@@ -31,11 +31,26 @@ ADD_SET_BUTTON.onclick = () => {
 
 GENERATE_LOG.onclick = () => {
     let logString = `${SCRIM_DATE.value} | ${IS_COMP_CHECK.checked ? "COMP " : ""}Scrim against ${OPPO_TEAM.value}\n\nLineup goes here\n`;
+
+    if(!SCRIM_DATE.value){
+        alert("NO DATE PROVIDED");
+        return;
+    } else if(!YOUR_TEAM.value || !OPPO_TEAM.value) {
+        alert("MISSING TEAM NAME");
+        return;
+    }
+
     for(let i = 0; i < SETS.length; i++){
         const set = SETS[i];
         const team1Points = parseInt(set.team1Points.value);
         const team2Points = parseInt(set.team2Points.value);
         const winningTeam = (team1Points > team2Points) ? YOUR_TEAM.value : OPPO_TEAM.value;
+
+        if(!team1Points || !team2Points){
+            alert(`NO POINTS PROVIDED ON SET ${set.index + 1}`);
+            return;
+        }
+        
         logString += `\nSet ${set.index + 1}: ${team1Points}-${team2Points} ${winningTeam}`;
     }
 
