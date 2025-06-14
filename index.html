@@ -11,6 +11,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <script src="SetInfo.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -20,20 +21,34 @@
         <div class="main-container">
             <div id="set-column" class="small-column">
                 <div class="row-height set-header">SET</div>
-                <button id="add-set" class="add-set-button row-height">+</button>
-                <div class="set-number row-height">1</div>
-                <div class="set-number row-height">2</div>
+                <button id="add-set" class="add-set-button">+</button>
             </div>
             <div id="team-1-column" class="big-column">
-                <input class="team row-height" type="text" placeholder="Team 1" />
+                <input id="your-team" class="team row-height" type="text" placeholder="Your Team" />
             </div>
-            <div class="big-column" style="font-size: 2.5em; font-weight: bold;">VS</div>
+            <div class="big-column">
+                <p style="font-size: 2.5em; font-weight: bold; margin: 0;">VS</p>
+                <div style="margin: auto 0 0 0;">
+                    <label for="scrim-date">DATE: </label>
+                    <input class="scrim-date" type="date" id="scrim-date" />
+                </div>
+            </div>
             <div id="team-2-column" class="big-column">
-                <input class="team row-height" type="text" placeholder="Team 2" />
+                <input id="opposite-team" class="team row-height" type="text" placeholder="Opponent Team" />
             </div>
-            <div class="small-column"></div>
+            <div id="remove-set-column" class="small-column">
+                <!-- Spacer -->
+                <div class="row-height"></div>
+            </div>
+        </div>
+        <div style="margin-top: 5vh auto 10vh auto;">
+            <div>
+                <input type="checkbox" id="scrim-type" />
+                <label for="scrim-type">Competitive?</label>
+            </div>
+            <button id="generate-log" class="generate-log">GENERATE LOG</button>
         </div>
         
-        <script src="script.js" async defer></script>
+        <script src="script.js"></script>
     </body>
 </html>
