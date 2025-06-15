@@ -113,11 +113,9 @@ function addSet(index){
                 info.team2Points.focus();
             }
         } else if(e.key === "ArrowRight"){
-            console.log(e.target.selectionStart);
             if(e.target.selectionStart === info.team1Points.value.length){
-                console.log("go to next");
-                // e.preventDefault();
-                // info.team2Points.focus();
+                e.preventDefault();
+                info.team2Points.focus();
             }
         // shift key pressed down and all boxes are empty
         } else if(e.key === "Backspace" && !info.team1Points.value && !info.team2Points.value){
@@ -137,6 +135,11 @@ function addSet(index){
                 addSet(info.index + 1).team1Points.focus();
             } else if(info.index < SETS.length - 1) {
                 SETS[info.index + 1].team1Points.focus();
+            }
+        } else if(e.key === "ArrowLeft"){
+            if(e.target.selectionStart === 0){
+                e.preventDefault();
+                info.team1Points.focus();
             }
         }
     });
