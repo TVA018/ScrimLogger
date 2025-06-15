@@ -59,15 +59,23 @@ function addMemberEntry(index){
             } else {
                 addMemberEntry(member.index + 1).playerName.focus();
             }
+        } else if(e.key === "ArrowDown" && member.index < LINEUP.length - 1){
+            e.preventDefault();
+            LINEUP[member.index + 1].playerName.focus();
+        } else if(e.key === "ArrowUp" && member.index > 0){
+            e.preventDefault();
+            LINEUP[member.index - 1].playerName.focus();
         } else if(member.playerName.value.length <= 0) {
             if(e.key === "Backspace"){
                 if(member.index - 1 >= 0){
+                    e.preventDefault();
                     LINEUP[member.index - 1].playerName.focus();
                 }
                 member.remove();
                 removeMemberEntry(member);
             } else if(e.key === "Delete"){
                 if(member.index + 1 < LINEUP.length){
+                    e.preventDefault();
                     LINEUP[member.index + 1].playerName.focus();
                 }
                 member.remove();
@@ -99,13 +107,21 @@ function addSet(index){
 
     info.team1Points.addEventListener("keydown", e => {
         if(e.key === "Enter"){
-            info.team2Points.focus();
+            if(e.shiftKey && info.team2Points.value){ // if shift key pressed and team2points isnt empty
+                addSet(info.index + 1).team1Points.focus();
+            } else {
+                info.team2Points.focus();
+            }
         }
     });
 
     info.team2Points.addEventListener("keydown", e => {
         if(e.key === "Enter"){
-            addSet(info.index + 1).team1Points.focus();
+            if(e.shiftKey || info.index == SETS.length - 1){
+                addSet(info.index + 1).team1Points.focus();
+            } else if(info.index < SETS.length - 1) {
+                SETS[info.index + 1].team1Points.focus();
+            }
         }
     });
 
@@ -113,11 +129,11 @@ function addSet(index){
 }
 
 function removeSet(info){
-    SETS.splice(info.index, 1);
-
-    for(let j = info.index; j < SETS.length; j++){
+    for(let j = info.index + 1; j < SETS.length; j++){
         SETS[j].setIndex(j - 1);
     }
+
+    SETS.splice(info.index, 1);
 }
 
 SCRIM_DATE.valueAsDate = new Date();
@@ -129,6 +145,22 @@ ADD_MEMBER.onclick = () => {
 ADD_SET_BUTTON.onclick = () => {
     addSet(SETS.length);
 }
+
+YOUR_TEAM.addEventListener("keydown", e => {
+    if(e.key == "Enter"){
+        OPPO_TEAM.focus();
+    }
+});
+
+OPPO_TEAM.addEventListener("keydown", e => {
+    if(e.key == "Enter"){
+        addSet(SETS.length).team1Points.focus();
+    }
+});
+
+// document.addEventListener("keydown", e => {
+//     console.log(e.key);
+// });
 
 GENERATE_LOG.onclick = () => {
     let logString = `${SCRIM_DATE.value} | ${IS_COMP_CHECK.checked ? "COMP " : ""}Scrim against ${OPPO_TEAM.value}`;
