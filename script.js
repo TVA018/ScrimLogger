@@ -112,6 +112,22 @@ function addSet(index){
             } else {
                 info.team2Points.focus();
             }
+        } else if(e.key === "ArrowRight"){
+            console.log(e.target.selectionStart);
+            if(e.target.selectionStart === info.team1Points.value.length){
+                console.log("go to next");
+                // e.preventDefault();
+                // info.team2Points.focus();
+            }
+        // shift key pressed down and all boxes are empty
+        } else if(e.key === "Backspace" && !info.team1Points.value && !info.team2Points.value){
+            e.preventDefault();
+            if(SETS.length > 1) {
+                SETS[Math.max(0, info.index - 1)].team1Points.focus();
+            }
+
+            info.remove();
+            removeSet(info);
         }
     });
 
@@ -196,7 +212,7 @@ GENERATE_LOG.onclick = () => {
         const team2Points = parseInt(set.team2Points.value);
         const winningTeam = (team1Points > team2Points) ? YOUR_TEAM.value : OPPO_TEAM.value;
 
-        if(!team1Points || !team2Points){
+        if(isNaN(team1Points) || isNaN(team2Points)){
             alert(`NO POINTS PROVIDED ON SET ${set.index + 1}`);
             return;
         }
