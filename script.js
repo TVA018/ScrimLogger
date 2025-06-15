@@ -46,13 +46,18 @@ function addMemberEntry(index){
     let member = new LineupEntry(LINEUP_CONTAINER, index);
     member.removeEntryButton.addEventListener("click", () => removeMemberEntry(member));
 
+    for(let j = index; j < LINEUP.length; j++){
+        LINEUP[j].setIndex(j + 1);
+    }
+
+    LINEUP.splice(index, 0, member);
+
     member.playerName.addEventListener("keydown", (e) => {
         if(e.key === "Enter"){
             if(e.target.selectionStart === 0 && member.playerName.value.length > 0){
                 addMemberEntry(member.index - 1);
             } else {
-                addMemberEntry(member.index + 1);
-                LINEUP[member.index + 1].playerName.focus();
+                addMemberEntry(member.index + 1).playerName.focus();
             }
         } else if(member.playerName.value.length <= 0) {
             if(e.key === "Backspace"){
@@ -71,11 +76,7 @@ function addMemberEntry(index){
         }
     });
 
-    for(let j = index; j < LINEUP.length; j++){
-        LINEUP[j].setIndex(j + 1);
-    }
-
-    LINEUP.splice(index, 0, member);
+    return member;
 }
 
 function removeMemberEntry(entryElement){
@@ -95,6 +96,20 @@ function addSet(index){
     }
     
     SETS.splice(index, 0, info);
+
+    info.team1Points.addEventListener("keydown", e => {
+        if(e.key === "Enter"){
+            info.team2Points.focus();
+        }
+    });
+
+    info.team2Points.addEventListener("keydown", e => {
+        if(e.key === "Enter"){
+            addSet(info.index + 1).team1Points.focus();
+        }
+    });
+
+    return info;
 }
 
 function removeSet(info){
