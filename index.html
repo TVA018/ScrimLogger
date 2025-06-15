@@ -11,34 +11,43 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <script src="Positions.js"></script>
         <script src="SetInfo.js"></script>
+        <script src="LineupEntry.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <h1>Scrim Logger</h1>
-        <div class="main-container">
-            <div id="set-column" class="small-column">
-                <div class="row-height set-header">SET</div>
-                <button id="add-set" class="add-set-button">+</button>
-            </div>
-            <div id="team-1-column" class="big-column">
-                <input id="your-team" class="team row-height" type="text" placeholder="Your Team" />
-            </div>
-            <div class="big-column">
-                <p style="font-size: 2.5em; font-weight: bold; margin: 0;">VS</p>
-                <div style="margin: auto 0 0 0;">
-                    <label for="scrim-date">DATE: </label>
-                    <input class="scrim-date" type="date" id="scrim-date" />
+        <div id="lineup-container" class="lineup-container">
+            <h1 class="section-header">LINEUP</h1>
+            <button id="add-member" class="plus">Add Team Member</button>
+        </div>
+        <div class="match-container">
+            <h1 class="section-header">SETS</h1>
+            <div>
+                <div id="set-column" class="small-column">
+                    <div class="row-height set-header">SET</div>
+                    <button id="add-set" class="plus add-set-button">+</button>
                 </div>
-            </div>
-            <div id="team-2-column" class="big-column">
-                <input id="opposite-team" class="team row-height" type="text" placeholder="Opponent Team" />
-            </div>
-            <div id="remove-set-column" class="small-column">
-                <!-- Spacer -->
-                <div class="row-height"></div>
+                <div id="team-1-column" class="big-column">
+                    <input id="your-team" class="team row-height" type="text" placeholder="Your Team" />
+                </div>
+                <div class="big-column">
+                    <p style="font-size: 2.5em; font-weight: bold; margin: 0;">VS</p>
+                    <div style="margin: auto 0 0 0;">
+                        <label for="scrim-date">DATE: </label>
+                        <input class="scrim-date" type="date" id="scrim-date" />
+                    </div>
+                </div>
+                <div id="team-2-column" class="big-column">
+                    <input id="opposite-team" class="team row-height" type="text" placeholder="Opponent Team" />
+                </div>
+                <div id="remove-set-column" class="small-column">
+                    <!-- Spacer -->
+                    <div class="row-height"></div>
+                </div>
             </div>
         </div>
         <div style="margin-top: 5vh auto 10vh auto;">

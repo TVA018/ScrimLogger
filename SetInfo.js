@@ -14,7 +14,7 @@ class SetInfo {
         this.team1Points.type = "number";
         this.team2Points.className = "points row-height";
         this.team2Points.type = "number";
-        this.removeSetButton.className = "remove-set-button";
+        this.removeSetButton.className = "remove-set-button minus";
         this.removeSetButton.textContent = "-";
         this.removeSetButton.onclick = () => {this.remove()}; // have to wrap in a lambda function so that "this" references SetInfo, not the removeSetButton
 

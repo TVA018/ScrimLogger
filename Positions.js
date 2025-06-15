@@ -1,0 +1,1 @@
+const POSITIONS = ["Setter", "Opposite", "Libero", "DS", "Outside 1", "Outside 2", "Middle 1", "Middle 2"];

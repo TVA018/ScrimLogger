@@ -2,6 +2,8 @@ const SET_COLUMN = document.getElementById("set-column");
 const REMOVE_SET_COLUMN = document.getElementById("remove-set-column");
 const ADD_SET_BUTTON = document.getElementById("add-set");
 const CLOSE_PREVIEW_BUTTON = document.getElementById("close-preview");
+const LINEUP_CONTAINER = document.getElementById("lineup-container");
+const ADD_MEMBER = document.getElementById("add-member");
 
 const PREVIEW_CONTAINER = document.getElementById("preview-container");
 const PREVIEW_TEXTAREA = document.getElementById("preview-text");
@@ -16,6 +18,7 @@ const YOUR_TEAM = document.getElementById("your-team");
 const OPPO_TEAM = document.getElementById("opposite-team");
 const IS_COMP_CHECK = document.getElementById("scrim-type");
 
+const LINEUP = [];
 const SETS = [];
 
 function onSetRemoval(indexOfRemovedSet){
@@ -47,9 +50,37 @@ ADD_SET_BUTTON.onclick = () => {
     SETS.push(info);
 }
 
-GENERATE_LOG.onclick = () => {
-    let logString = `${SCRIM_DATE.value} | ${IS_COMP_CHECK.checked ? "COMP " : ""}Scrim against ${OPPO_TEAM.value}\n\nLineup goes here\n`;
+ADD_MEMBER.onclick = () => {
+    let member = new LineupEntry(LINEUP_CONTAINER);
+    member.setOnRemoveCallback((entry) => {
+        for(let i = 0; i < LINEUP.length; i++){
+            if(LINEUP[i] == entry){
+                LINEUP.splice(i, 1);
+            }
+        }
+    });
+    LINEUP.push(member);
+}
 
+GENERATE_LOG.onclick = () => {
+    let logString = `${SCRIM_DATE.value} | ${IS_COMP_CHECK.checked ? "COMP " : ""}Scrim against ${OPPO_TEAM.value}`;
+
+    // Lineup
+    for(const MEMBER of LINEUP){
+        const POSITION = MEMBER.select.value;
+        const PLAYER_NAME = MEMBER.playerName.value;
+        
+        if(!PLAYER_NAME) {
+            alert("NO PLAYER NAME PROVIDED FOR ONE OF THE MEMBERS");
+            return;
+        }
+
+        logString += `\n${POSITION}: ${PLAYER_NAME}`;
+    }
+
+    logString += "\n";
+
+    // Metadata
     if(!SCRIM_DATE.value){
         alert("NO DATE PROVIDED");
         return;
@@ -58,6 +89,7 @@ GENERATE_LOG.onclick = () => {
         return;
     }
 
+    // Sets data
     for(let i = 0; i < SETS.length; i++){
         const set = SETS[i];
         const team1Points = parseInt(set.team1Points.value);

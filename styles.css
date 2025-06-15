@@ -15,8 +15,13 @@ h1 {
     margin-top: 0.2em;
 }
 
-div, h1, h2, h3, label, p, span, button, a, textarea {
+div, h1, h2, h3, label, p, span, a, textarea, select, option {
     color: #ddd;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+button {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
 }
@@ -29,7 +34,32 @@ input {
     text-align: center;
 }
 
-.main-container {
+select {
+    height: 100%;
+    width: 20%;
+    padding: 0 10px;
+}
+
+select, option {
+    background-color: #181a29;
+    font-size: x-large;
+}
+
+.section-header {
+    color: #ff9061;
+    width: 90vw;
+    background-color: #111;
+    padding: 1vh 0;
+    margin: 2vh auto;
+}
+
+.match-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.match-container > div {
     display: flex;
     flex-flow: row;
     justify-content: center;
@@ -50,23 +80,19 @@ input {
 
 .add-set-button, .remove-set-button {
     aspect-ratio: 1;
-    border-radius: 100%;
-    color: #fff;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-align: center;
     box-sizing: border-box;
+    border-radius: 100%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     height: 5vh;
     margin: 0.5vh;
 }
 
 .add-set-button {
-    background-color: #27a527;
     font-size: xx-large;
     order: 100;
 }
 
 .remove-set-button {
-    background-color: #a52727;
     font-size: x-large;
 }
 
@@ -164,6 +190,55 @@ input {
     padding: 0;
     margin: 0;
     resize: none;
+}
+
+.lineup-container {
+    width: 90vw;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    margin: 4vh auto;
+}
+
+.lineup-container > div {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+.lineup-container > div > input {
+    height: 100%;
+    width: 70%;
+    font-size: x-large;
+}
+
+.lineup-container > button {
+    width: 100%;
+    height: 6vh;
+    order: 100;
+    font-size: xx-large;
+    margin: 1vh 0;
+}
+
+.lineup-container > div > button {
+    margin: auto;
+    height: 100%;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    font-size: x-large;
+}
+
+.plus, .minus {
+    color: #fff;
+    text-align: center;
+}
+
+.plus {
+    background-color: #27a527;
+}
+
+.minus {
+    background-color: #a52727;
 }
 
 label, input[type="date"] {
