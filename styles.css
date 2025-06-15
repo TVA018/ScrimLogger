@@ -89,7 +89,7 @@ select, option {
 
 .add-set-button {
     font-size: xx-large;
-    order: 100;
+    order: 10000;
 }
 
 .remove-set-button {
@@ -215,7 +215,7 @@ select, option {
 .lineup-container > button {
     width: 100%;
     height: 6vh;
-    order: 100;
+    order: 10000;
     font-size: xx-large;
     margin: 1vh 0;
 }

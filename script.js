@@ -42,24 +42,77 @@ function closePreview(){
     INPUT_BLOCKER.style.display = "none";
 }
 
-SCRIM_DATE.valueAsDate = new Date();
+function addMemberEntry(index){
+    let member = new LineupEntry(LINEUP_CONTAINER, index);
+    member.removeEntryButton.addEventListener("click", () => removeMemberEntry(member));
 
-ADD_SET_BUTTON.onclick = () => {
-    let info = new SetInfo(SET_COLUMN, TEAM_1_COLUMN, TEAM_2_COLUMN, REMOVE_SET_COLUMN, SETS.length);
-    info.setOnRemoveCallback(onSetRemoval);
-    SETS.push(info);
-}
-
-ADD_MEMBER.onclick = () => {
-    let member = new LineupEntry(LINEUP_CONTAINER);
-    member.setOnRemoveCallback((entry) => {
-        for(let i = 0; i < LINEUP.length; i++){
-            if(LINEUP[i] == entry){
-                LINEUP.splice(i, 1);
+    member.playerName.addEventListener("keydown", (e) => {
+        if(e.key === "Enter"){
+            if(e.target.selectionStart === 0 && member.playerName.value.length > 0){
+                addMemberEntry(member.index - 1);
+            } else {
+                addMemberEntry(member.index + 1);
+                LINEUP[member.index + 1].playerName.focus();
+            }
+        } else if(member.playerName.value.length <= 0) {
+            if(e.key === "Backspace"){
+                if(member.index - 1 >= 0){
+                    LINEUP[member.index - 1].playerName.focus();
+                }
+                member.remove();
+                removeMemberEntry(member);
+            } else if(e.key === "Delete"){
+                if(member.index + 1 < LINEUP.length){
+                    LINEUP[member.index + 1].playerName.focus();
+                }
+                member.remove();
+                removeMemberEntry(member);
             }
         }
     });
-    LINEUP.push(member);
+
+    for(let j = index; j < LINEUP.length; j++){
+        LINEUP[j].setIndex(j + 1);
+    }
+
+    LINEUP.splice(index, 0, member);
+}
+
+function removeMemberEntry(entryElement){
+    for(let j = entryElement.index + 1; j < LINEUP.length; j++){
+        LINEUP[j].setIndex(j - 1);
+    }
+
+    LINEUP.splice(entryElement.index, 1);
+}
+
+function addSet(index){
+    let info = new SetInfo(SET_COLUMN, TEAM_1_COLUMN, TEAM_2_COLUMN, REMOVE_SET_COLUMN, index);
+    info.removeSetButton.addEventListener("click", () => removeSet(info));
+
+    for(let j = index; j < SETS.length; j++){
+        SETS[j].setIndex(j + 1);
+    }
+    
+    SETS.splice(index, 0, info);
+}
+
+function removeSet(info){
+    SETS.splice(info.index, 1);
+
+    for(let j = info.index; j < SETS.length; j++){
+        SETS[j].setIndex(j - 1);
+    }
+}
+
+SCRIM_DATE.valueAsDate = new Date();
+
+ADD_MEMBER.onclick = () => {
+    addMemberEntry(LINEUP.length);
+}
+
+ADD_SET_BUTTON.onclick = () => {
+    addSet(SETS.length);
 }
 
 GENERATE_LOG.onclick = () => {

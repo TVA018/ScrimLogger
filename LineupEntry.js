@@ -1,6 +1,6 @@
 class LineupEntry {
-    constructor(lineupContainer){
-        this._removeCallback = () => {};
+    constructor(lineupContainer, index){
+        this.index = index;
         this.mainDiv = document.createElement("div");
         this.select = document.createElement("select");
         this.playerName = document.createElement("input");
@@ -23,17 +23,23 @@ class LineupEntry {
         this.mainDiv.append(this.select);
         this.mainDiv.append(this.playerName);
         this.mainDiv.append(this.removeEntryButton);
+
         this.removeEntryButton.onclick = () => this.remove();
+
+        this.setIndex(index);
+
+        this.mainDiv.style.order = index;
+
         lineupContainer.append(this.mainDiv);
     }
 
-    /** Should be in the form of func(LineupEntry entry) */
-    setOnRemoveCallback(callbackFunc){
-        this._removeCallback = callbackFunc;
+    setIndex(newIndex){
+        this.index = newIndex;
+        this.mainDiv.style.order = newIndex;
     }
 
     remove(){
         this.mainDiv.remove();
-        callbackFunc(this);
+        //test
     }
 }

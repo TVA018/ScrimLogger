@@ -1,7 +1,6 @@
 class SetInfo {
     constructor(setContainer, team1Container, team2Container, removeSetContainer, index){
         this.index = index;
-        this._removeCallback = () => {};
 
         this.setLabel = document.createElement("div");
         this.team1Points = document.createElement("input");
@@ -18,6 +17,8 @@ class SetInfo {
         this.removeSetButton.textContent = "-";
         this.removeSetButton.onclick = () => {this.remove()}; // have to wrap in a lambda function so that "this" references SetInfo, not the removeSetButton
 
+        this.setIndex(index);
+
         setContainer.append(this.setLabel);
         team1Container.append(this.team1Points);
         team2Container.append(this.team2Points);
@@ -26,12 +27,11 @@ class SetInfo {
 
     setIndex(newIndex){
         this.index = newIndex;
+        this.setLabel.style.order = newIndex;
+        this.team1Points.style.order = newIndex;
+        this.team2Points.style.order = newIndex;
+        this.removeSetButton.style.order = newIndex;
         this.setLabel.innerHTML = newIndex + 1;
-    }
-
-    /** Function should be in the form func(setIndex) */
-    setOnRemoveCallback(callbackFunc){
-        this._removeCallback = callbackFunc;
     }
 
     remove(){
@@ -39,6 +39,5 @@ class SetInfo {
         this.team1Points.remove();
         this.team2Points.remove();
         this.removeSetButton.remove();
-        this._removeCallback(this.index);
     }
 }
