@@ -28,9 +28,8 @@ let USERNAME;
 
 if((PAGE_URL.slice(0, PAGE_BASE.length) == PAGE_BASE)){
     USERNAME = PAGE_URL.search(PAGE_BASE_REGEX);
+    GITHUB_LINK.href = `https://github.com/${USERNAME.slice(PAGE_BASE.length)}/ScrimLogger`;
 }
-
-GITHUB_LINK.href = `https://github.com/${USERNAME.slice(PAGE_BASE.length)}/ScrimLogger`;
 
 const LINEUP = [];
 const SETS = [];
@@ -180,6 +179,7 @@ function removeSet(info){
 SCRIM_DATE.valueAsDate = new Date();
 
 ADD_MEMBER.onclick = () => {
+    console.log(PAGE_URL, "TEST TEST TEST");
     addMemberEntry(LINEUP.length);
 }
 
