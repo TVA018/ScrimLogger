@@ -126,6 +126,10 @@ function addSet(index){
 
             info.remove();
             removeSet(info);
+        } else if(e.key === "ArrowDown" && info.index < SETS.length - 1){
+            SETS[info.index + 1].team1Points.focus();
+        } else if(e.key === "ArrowUp" && info.index > 0){
+            SETS[info.index - 1].team1Points.focus();
         }
     });
 
@@ -141,6 +145,10 @@ function addSet(index){
                 e.preventDefault();
                 info.team1Points.focus();
             }
+        } else if(e.key === "ArrowDown" && info.index < SETS.length - 1){
+            SETS[info.index + 1].team2Points.focus();
+        } else if(e.key === "ArrowUp" && info.index > 0){
+            SETS[info.index - 1].team2Points.focus();
         }
     });
 
