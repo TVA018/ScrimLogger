@@ -18,19 +18,6 @@ const YOUR_TEAM = document.getElementById("your-team");
 const OPPO_TEAM = document.getElementById("opposite-team");
 const IS_COMP_CHECK = document.getElementById("scrim-type");
 
-const GITHUB_LINK = document.getElementById("github-link");
-
-const PAGE_URL = window.location.href;
-const PAGE_BASE = "https://";
-const PAGE_BASE_REGEX = new RegExp(`^${PAGE_BASE}[a-z]+`);
-
-let USERNAME;
-
-if((PAGE_URL.slice(0, PAGE_BASE.length) == PAGE_BASE)){
-    USERNAME = PAGE_URL.search(PAGE_BASE_REGEX);
-    GITHUB_LINK.href = `https://github.com/${USERNAME.slice(PAGE_BASE.length)}/ScrimLogger`;
-}
-
 const LINEUP = [];
 const SETS = [];
 
@@ -179,7 +166,6 @@ function removeSet(info){
 SCRIM_DATE.valueAsDate = new Date();
 
 ADD_MEMBER.onclick = () => {
-    console.log(PAGE_URL, "TEST TEST TEST");
     addMemberEntry(LINEUP.length);
 }
 
